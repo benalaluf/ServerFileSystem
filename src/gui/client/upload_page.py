@@ -79,9 +79,16 @@ class UploadPage(QWidget):
     def usb_file_dialog(self, path):
         file_dialog = QFileDialog()
         file_dialog.setWindowTitle("USB Stick Detected")
-        file_dialog.setFileMode(QFileDialog.Directory)
+        file_dialog.setFileMode(QFileDialog.ExistingFile)
         file_dialog.setOption(QFileDialog.ReadOnly, True)
         file_dialog.setDirectory(path)
+
+        filter_text = "Text files (.txt)"
+        filter_images = "Image files (.png .jpg.jpeg .gif)"
+        filter_videos = "Video files (.mp4 .avi.mkv)"
+        filter_sounds = "Sound files (.mp3.wav)"
+
+        file_dialog.setNameFilter(filter_text + ";;" + filter_images + ";;" + filter_videos + ";;" + filter_sounds)
 
         result = file_dialog.exec_()
         if result == QFileDialog.Accepted:
