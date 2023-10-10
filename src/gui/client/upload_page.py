@@ -26,7 +26,7 @@ class UploadPage(QWidget):
 
         chose_file_layout = QHBoxLayout()
 
-        chose_file_button_layout =  QHBoxLayout()
+        chose_file_button_layout = QHBoxLayout()
         chose_file_button = QPushButton("Choose File")
         chose_file_button.setStyleSheet("font-size: 18px;border-radius: 10px; color: #ffffff;")
         chose_file_button.clicked.connect(self.file_dialog)
@@ -37,7 +37,7 @@ class UploadPage(QWidget):
         chose_file_button_from_usb.setStyleSheet("font-size: 14px;border-radius: 10px; color: #ffffff;")
         chose_file_button_from_usb.clicked.connect(self.upload_from_usb)
         chose_file_button_from_usb.setFixedHeight(35)
-        chose_file_button_from_usb.setFixedWidth(80)# Increase button height
+        chose_file_button_from_usb.setFixedWidth(80)  # Increase button height
         chose_file_button_layout.addWidget(chose_file_button_from_usb)
         chose_file_layout.addLayout(chose_file_button_layout)
         self.file_label = QLabel(self.chosen_file)
@@ -88,7 +88,7 @@ class UploadPage(QWidget):
             selected_files = file_dialog.selectedFiles()
             if selected_files:
                 selected_directory = selected_files[0]
-                QMessageBox.information(None, "Selected Directory", f"Selected Directory: {selected_directory}")
+                self.chosen_file =selected_directory
 
     def file_dialog(self):
         options = QFileDialog.Options()
