@@ -96,6 +96,7 @@ class UploadPage(QWidget):
             if selected_files:
                 selected_directory = selected_files[0]
                 self.chosen_file =selected_directory
+                self.file_label.setText(self.chosen_file)
 
     def file_dialog(self):
         options = QFileDialog.Options()
