@@ -83,10 +83,10 @@ class UploadPage(QWidget):
         file_dialog.setOption(QFileDialog.ReadOnly, True)
         file_dialog.setDirectory(path)
 
-        filter_text = "Text files (.txt)"
-        filter_images = "Image files (.png .jpg.jpeg .gif)"
-        filter_videos = "Video files (.mp4 .avi.mkv)"
-        filter_sounds = "Sound files (.mp3.wav)"
+        filter_text = "Text files (*.txt)"
+        filter_images = "Image files (*.png *.jpg *.jpeg *.gif)"
+        filter_videos = "Video files (*.mp4 *.avi *.mkv)"
+        filter_sounds = "Sound files (*.mp3 *.wav)"
 
         file_dialog.setNameFilter(filter_text + ";;" + filter_images + ";;" + filter_videos + ";;" + filter_sounds)
 
@@ -107,10 +107,10 @@ class UploadPage(QWidget):
         file_dialog.setWindowTitle("Custom File Dialog")
         file_dialog.setFileMode(QFileDialog.ExistingFile)
 
-        filter_text = "Text files (.txt)"
-        filter_images = "Image files (.png .jpg.jpeg .gif)"
-        filter_videos = "Video files (.mp4 .avi.mkv)"
-        filter_sounds = "Sound files (.mp3.wav)"
+        filter_text = "Text files (*.txt)"
+        filter_images = "Image files (*.png *.jpg *.jpeg *.gif)"
+        filter_videos = "Video files (*.mp4 *.avi *.mkv)"
+        filter_sounds = "Sound files (*.mp3 *.wav)"
 
         file_dialog.setNameFilter(filter_text + ";;" + filter_images + ";;" + filter_videos + ";;" + filter_sounds)
 
