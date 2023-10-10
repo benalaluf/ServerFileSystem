@@ -21,13 +21,13 @@ class MainMenuPage(QWidget):
         layout.addSpacing(150)
 
         button_layout = QHBoxLayout()
-        download_button = QPushButton("Download")
-        download_button.setStyleSheet("background-color: #007AFF; color: white; font-size: 24px; "
+        self.download_button = QPushButton("Download")
+        self.download_button.setStyleSheet("background-color: #007AFF; color: white; font-size: 24px; "
                                       "border-radius: 10px;")
-        download_button.setToolTip("Download files from the server")
-        download_button.clicked.connect(self.parent.download)
-        download_button.setFixedHeight(80)  # Increase button height
-        button_layout.addWidget(download_button)
+        self.download_button.setToolTip("Download files from the server")
+        self.download_button.clicked.connect(self.parent.download)
+        self.download_button.setFixedHeight(80)  # Increase button height
+        button_layout.addWidget(self.download_button)
 
         upload_button = QPushButton("Upload")
         upload_button.setStyleSheet("background-color: #4CD964; color: white; font-size: 24px; "

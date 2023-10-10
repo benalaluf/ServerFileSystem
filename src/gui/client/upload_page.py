@@ -7,7 +7,7 @@ class UploadPage(QWidget):
     def __init__(self, parent):
         super().__init__()
         self.parent = parent
-        self.chosen_file = None
+        self.chosen_file = 'None'
         self.setup_ui()
 
     def setup_ui(self):
@@ -34,13 +34,13 @@ class UploadPage(QWidget):
 
         self.layout.addLayout(chose_file_layout)
 
-        upload_button = QPushButton("Upload")
-        upload_button.setStyleSheet("background-color: #4CD964; color: white; font-size: 18px; "
+        self.upload_button = QPushButton("Upload")
+        self.upload_button.setStyleSheet("background-color: #4CD964; color: white; font-size: 18px; "
                                     "border-radius: 10px;")
-        upload_button.setToolTip("Upload the selected file")
-        upload_button.clicked.connect(self.upload)
-        upload_button.setFixedHeight(35)  # Increase button height
-        self.layout.addWidget(upload_button)
+        self.upload_button.setToolTip("Upload the selected file")
+        self.upload_button.clicked.connect(self.upload)
+        self.upload_button.setFixedHeight(35)  # Increase button height
+        self.layout.addWidget(self.upload_button)
 
         self.layout.addStretch(1)
         back_button = QPushButton("Back to Menu")
@@ -60,8 +60,12 @@ class UploadPage(QWidget):
         file_dialog.setWindowTitle("Custom File Dialog")
         file_dialog.setFileMode(QFileDialog.ExistingFile)
 
-        filter_text = "Text files (*.txt);;All files (*)"
-        file_dialog.setNameFilter(filter_text)
+        filter_text = "Text files (.txt)"
+        filter_images = "Image files (.png .jpg.jpeg .gif)"
+        filter_videos = "Video files (.mp4 .avi.mkv)"
+        filter_sounds = "Sound files (.mp3.wav)"
+
+        file_dialog.setNameFilter(filter_text + ";;" + filter_images + ";;" + filter_videos + ";;" + filter_sounds)
 
         if file_dialog.exec():
             file_name = file_dialog.selectedFiles()[0]

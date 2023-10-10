@@ -7,7 +7,7 @@ class DownloadPage(QWidget):
     def __init__(self, parent):
         super().__init__()
         self.parent = parent
-        self.chosen_file = None
+        self.chosen_file = 'None'
         self.setup_ui()
 
     def setup_ui(self):
@@ -27,11 +27,6 @@ class DownloadPage(QWidget):
         self.list_widget = QListWidget()
         self.scroll_area.setWidget(self.list_widget)
 
-        for i in range(1, 11):
-            item = QListWidgetItem(f"File {i}")
-            item.setFlags(item.flags() | Qt.ItemFlag.ItemIsSelectable)
-            self.list_widget.addItem(item)
-
         self.list_widget.itemClicked.connect(self.on_item_clicked)
 
         self.download_button = QPushButton("Download")
@@ -48,7 +43,8 @@ class DownloadPage(QWidget):
         self.back_button.clicked.connect(self.parent.show_menu)
         self.layout.addWidget(self.back_button)
 
-    def add_item(self, item: QListWidgetItem):
+    def add_item(self, text: str):
+        item = QListWidgetItem(text)
         item.setFlags(item.flags() | Qt.ItemFlag.ItemIsSelectable)
         self.list_widget.addItem(item)
 
