@@ -1,3 +1,4 @@
+import psutil
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QPushButton, QFileDialog, QProgressBar, \
     QMessageBox
@@ -24,11 +25,21 @@ class UploadPage(QWidget):
         self.layout.addSpacing(100)
 
         chose_file_layout = QHBoxLayout()
+
+        chose_file_button_layout =  QHBoxLayout()
         chose_file_button = QPushButton("Choose File")
         chose_file_button.setStyleSheet("font-size: 18px;border-radius: 10px; color: #ffffff;")
-        chose_file_button.clicked.connect(self.showCustomFileDialog)
+        chose_file_button.clicked.connect(self.file_dialog)
         chose_file_button.setFixedHeight(35)  # Increase button height
-        chose_file_layout.addWidget(chose_file_button)
+        chose_file_button_layout.addWidget(chose_file_button)
+
+        chose_file_button_from_usb = QPushButton("from usb")
+        chose_file_button_from_usb.setStyleSheet("font-size: 14px;border-radius: 10px; color: #ffffff;")
+        chose_file_button_from_usb.clicked.connect(self.upload_from_usb)
+        chose_file_button_from_usb.setFixedHeight(35)
+        chose_file_button_from_usb.setFixedWidth(80)# Increase button height
+        chose_file_button_layout.addWidget(chose_file_button_from_usb)
+        chose_file_layout.addLayout(chose_file_button_layout)
         self.file_label = QLabel(self.chosen_file)
         chose_file_layout.addWidget(self.file_label)
 
@@ -36,7 +47,7 @@ class UploadPage(QWidget):
 
         self.upload_button = QPushButton("Upload")
         self.upload_button.setStyleSheet("background-color: #4CD964; color: white; font-size: 18px; "
-                                    "border-radius: 10px;")
+                                         "border-radius: 10px;")
         self.upload_button.setToolTip("Upload the selected file")
         self.upload_button.clicked.connect(self.upload)
         self.upload_button.setFixedHeight(35)  # Increase button height
@@ -50,7 +61,36 @@ class UploadPage(QWidget):
         back_button.clicked.connect(self.parent.show_menu)
         self.layout.addWidget(back_button)
 
-    def showCustomFileDialog(self):
+    def is_usb(self):
+        for partition in psutil.disk_partitions():
+            if 'removable' in partition.opts or 'usb' in partition.opts:
+                return True
+        return False
+
+    def upload_from_usb(self):
+        if self.is_usb():
+            for partition in psutil.disk_partitions():
+                if 'removable' in partition.opts or 'usb' in partition.opts:
+                    self.usb_file_dialog(partition.device)
+        else:
+            if self.chosen_file:
+                QMessageBox.information(self, "no usb", f"no usb detected: {self.chosen_file}")
+
+    def usb_file_dialog(self, path):
+        file_dialog = QFileDialog()
+        file_dialog.setWindowTitle("USB Stick Detected")
+        file_dialog.setFileMode(QFileDialog.Directory)
+        file_dialog.setOption(QFileDialog.ReadOnly, True)
+        file_dialog.setDirectory(path)
+
+        result = file_dialog.exec_()
+        if result == QFileDialog.Accepted:
+            selected_files = file_dialog.selectedFiles()
+            if selected_files:
+                selected_directory = selected_files[0]
+                QMessageBox.information(None, "Selected Directory", f"Selected Directory: {selected_directory}")
+
+    def file_dialog(self):
         options = QFileDialog.Options()
         options |= QFileDialog.ReadOnly  # To make the selected file read-only
 
