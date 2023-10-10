@@ -17,7 +17,7 @@ class DownloadPage(QWidget):
 
         download_label = QLabel("Download")
         download_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        download_label.setStyleSheet("font-family:Ariel; font-size: 34px; color: #007AFF;")
+        download_label.setStyleSheet("font-family:Arial; font-size: 34px; color: #007AFF;")
         self.layout.addWidget(download_label)
 
         self.scroll_area = QScrollArea()
