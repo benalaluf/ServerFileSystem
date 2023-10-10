@@ -34,7 +34,7 @@ class DownloadPage(QWidget):
                                            "border-radius: 10px;")
         self.download_button.setToolTip("Download the selected file")
         self.download_button.clicked.connect(self.download)
-        self.download_button.setFixedHeight(35)  # Increase button height
+        self.download_button.setFixedHeight(35)
 
         self.layout.addWidget(self.download_button)
 

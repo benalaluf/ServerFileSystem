@@ -59,7 +59,7 @@ class ClientApp(ClientConn):
         sys.exit(self.app.exec_())
 
     def main(self):
-        threading.Thread(super().main())
+        threading.Thread(super().main()).start()
         self.run()
 
 

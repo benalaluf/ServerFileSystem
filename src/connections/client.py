@@ -54,11 +54,14 @@ class ClientConn(ABC):
             f.write(file_data)
 
     def __read_file(self, file_name: str):
-        with open(file_name, 'rb') as f:
-            file_data = f.read()
+        try:
+            with open(file_name, 'rb') as f:
+                file_data = f.read()
 
-        file_name = file_name.split('/')[-1]
-        return file_name, file_data
+            file_name = file_name.split('/')[-1]
+            return file_name, file_data
+        except FileNotFoundError:
+            print("file not found")
 
     def __list_files(self):
         files = os.listdir(self.file_path)

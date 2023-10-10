@@ -13,13 +13,13 @@ class UploadPage(QWidget):
 
     def setup_ui(self):
         self.layout = QVBoxLayout()
-        self.layout.setAlignment(Qt.AlignmentFlag.AlignTop)  # Center the buttons vertically
+        self.layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.setLayout(self.layout)
 
         upload_label = QLabel("Upload")
         upload_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         upload_label.setStyleSheet(
-            "font-family:Arial ;font-size: 36px; color: #4CD964;")  # Adjust the font size and color
+            "font-family:Arial ;font-size: 36px; color: #4CD964;")
         self.layout.addWidget(upload_label)
 
         self.layout.addSpacing(100)
@@ -30,14 +30,14 @@ class UploadPage(QWidget):
         chose_file_button = QPushButton("Choose File")
         chose_file_button.setStyleSheet("font-size: 18px;border-radius: 10px; color: #ffffff;")
         chose_file_button.clicked.connect(self.file_dialog)
-        chose_file_button.setFixedHeight(35)  # Increase button height
+        chose_file_button.setFixedHeight(35)
         chose_file_button_layout.addWidget(chose_file_button)
 
         chose_file_button_from_usb = QPushButton("from usb")
         chose_file_button_from_usb.setStyleSheet("font-size: 14px;border-radius: 10px; color: #ffffff;")
         chose_file_button_from_usb.clicked.connect(self.upload_from_usb)
         chose_file_button_from_usb.setFixedHeight(35)
-        chose_file_button_from_usb.setFixedWidth(80)  # Increase button height
+        chose_file_button_from_usb.setFixedWidth(80)
         chose_file_button_layout.addWidget(chose_file_button_from_usb)
         chose_file_layout.addLayout(chose_file_button_layout)
         self.file_label = QLabel(self.chosen_file)
@@ -50,13 +50,13 @@ class UploadPage(QWidget):
                                          "border-radius: 10px;")
         self.upload_button.setToolTip("Upload the selected file")
         self.upload_button.clicked.connect(self.upload)
-        self.upload_button.setFixedHeight(35)  # Increase button height
+        self.upload_button.setFixedHeight(35)
         self.layout.addWidget(self.upload_button)
 
         self.layout.addStretch(1)
         back_button = QPushButton("Back to Menu")
         back_button.setStyleSheet(
-            "font-size: 18px;border-radius: 10px; color: #ffffff;")  # Removed background-color style
+            "font-size: 18px;border-radius: 10px; color: #ffffff;")
         back_button.setToolTip("Return to the main menu")
         back_button.clicked.connect(self.parent.show_menu)
         self.layout.addWidget(back_button)
@@ -100,7 +100,7 @@ class UploadPage(QWidget):
 
     def file_dialog(self):
         options = QFileDialog.Options()
-        options |= QFileDialog.ReadOnly  # To make the selected file read-only
+        options |= QFileDialog.ReadOnly
 
         file_dialog = QFileDialog()
         file_dialog.setOptions(options)

@@ -1,11 +1,12 @@
 import os
 import socket
 import threading
+from abc import ABC, abstractmethod
 
 from src.protocol.protocol import *
 
 
-class Server:
+class Server(ABC):
 
     def __init__(self, ip, port, file_path):
         self.ip = ip
@@ -31,6 +32,7 @@ class Server:
             packet = HandelPacket.recv_packet(conn)
             self.handle_packet(packet, conn)
 
+    @abstractmethod
     def handle_packet(self, packet: Packet, conn: socket.socket):
         print('got packet', packet.packet_type)
         if packet.packet_type == PacketType.GET:
